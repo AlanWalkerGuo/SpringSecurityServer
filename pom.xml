@@ -8,10 +8,51 @@
     <artifactId>guosh-security</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+
+    <!--声明变量-->
+    <properties>
+        <guosh.security.version>1.0-SNAPSHOT</guosh.security.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.spring.platform</groupId>
+                <artifactId>platform-bom</artifactId>
+                <version>Brussels-SR16</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Dalston.SR5</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!--<build>-->
+        <!--<plugins>-->
+            <!--<plugin>-->
+                <!--<groupId>org.apache.maven.plugins</groupId>-->
+                <!--<artifactId>maven-compiler-plugin</artifactId>-->
+                <!--<version>2.3.2</version>-->
+                <!--<configuration>-->
+                    <!--<source>1.8</source> &lt;!&ndash; 源代码使用的开发版本 &ndash;&gt;-->
+                    <!--<target>1.8</target> &lt;!&ndash; 需要生成的目标class文件的编译版本 &ndash;&gt;-->
+                    <!--<encoding>UTF-8</encoding>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
+        <!--</plugins>-->
+    <!--</build>-->
+
     <modules>
         <module>guosh-security-core</module>
         <module>guosh-security-browser</module>
         <module>guosh-security-demo</module>
+        <module>guosh-security-app</module>
     </modules>
 
 

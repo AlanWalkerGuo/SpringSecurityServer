@@ -1,0 +1,33 @@
+server:
+  port: 8080
+  context-path: /guoshsecurity
+
+spring:
+  datasource:
+    druid:
+      url: jdbc:mysql://localhost:3306/guosecurity?useUnicode=true&characterEncoding=utf8&useSSL=true
+      username: root
+      password: root
+      driver-class-name: com.mysql.jdbc.Driver
+      #属性来打开mergeSql功能；慢SQL记录
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      validation-query: SELECT 1
+      #监控配置
+      web-stat-filter:
+        url-pattern: /*
+        exclusions: /druid/*,*.js,*.gif,*.jpg,*.png,*.css,*.ico
+      stat-view-servlet:
+        url-pattern: /druid/*
+        login-username: guoadmin
+        login-password: guoadmin
+        #是否能按重制按键
+        reset-enable: true
+
+  #关闭spring session
+  session:
+    store-type: none
+
+#先关闭security默认配置
+security:
+  basic:
+    enabled: false

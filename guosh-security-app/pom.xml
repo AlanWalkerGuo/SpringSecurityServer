@@ -9,7 +9,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>guosh-security-browser</artifactId>
+    <artifactId>guosh-security-app</artifactId>
+
 
     <dependencies>
         <dependency>
@@ -17,11 +18,5 @@
             <artifactId>guosh-security-core</artifactId>
             <version>${guosh.security.version}</version>
         </dependency>
-        <!--session集群-->
-        <dependency>
-            <groupId>org.springframework.session</groupId>
-            <artifactId>spring-session</artifactId>
-        </dependency>
     </dependencies>
-
 </project>

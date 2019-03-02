@@ -12,4 +12,30 @@
     <artifactId>guosh-security-demo</artifactId>
 
 
+    <dependencies>
+        <dependency>
+            <groupId>com.guosh.security</groupId>
+            <artifactId>guosh-security-browser</artifactId>
+            <version>${guosh.security.version}</version>
+        </dependency>
+    </dependencies>
+
+
+    <build>
+        <!--demo是web程序需要运行打完包的名字-->
+        <finalName>guoshsecurity</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
