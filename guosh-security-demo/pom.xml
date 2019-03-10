@@ -18,6 +18,16 @@
             <artifactId>guosh-security-browser</artifactId>
             <version>${guosh.security.version}</version>
         </dependency>
+        <!--Spring boot测试框架-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
     </dependencies>
 
 
