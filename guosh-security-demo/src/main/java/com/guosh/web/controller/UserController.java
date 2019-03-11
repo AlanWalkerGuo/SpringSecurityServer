@@ -31,6 +31,27 @@ public class UserController {
         return user;
     }
 
+    @RequestMapping(value = "/{id:\\d+}",method = RequestMethod.PUT)
+    @JsonView(User.UserSimpleView.class)
+    //@Valid启用校验password不允许为空
+    public User updateUser(@Valid @RequestBody User user, BindingResult errors){
+        //如果校验有错误是true并打印错误信息
+        if(errors.hasErrors()){
+            errors.getAllErrors().stream().forEach(error -> System.out.println(error.getDefaultMessage()));
+        }
+        System.out.println(user.getUsername());
+        System.out.println(user.getPassword());
+        System.out.println(user.getBirthday());
+        user.setId("1");
+        return user;
+    }
+
+
+    @RequestMapping(value = "/{id:\\d+}",method = RequestMethod.DELETE)
+    //@Valid启用校验password不允许为空
+    public void deleteUser(@PathVariable String id){
+        System.out.println(id);
+    }
 
 
     @RequestMapping(method = RequestMethod.GET)
