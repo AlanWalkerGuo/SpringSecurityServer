@@ -48,7 +48,12 @@ spring:
   session:
     store-type: none
 
-#先关闭security默认配置
-security:
-  basic:
-    enabled: false
+
+#上传文件路径
+uploadfiledir:
+  filePath: /Users/shaohua/webapp/guoshsecurity
+
+#是否开启swagger
+sys:
+  swagger:
+    enable-swgger: true

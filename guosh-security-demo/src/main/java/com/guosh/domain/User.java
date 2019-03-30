@@ -3,6 +3,8 @@ package com.guosh.domain;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.guosh.validator.MyConstraint;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.NotBlank;
@@ -10,6 +12,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.validation.constraints.Past;
 import java.util.Date;
 
+@ApiModel(value="用户对象")
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
@@ -18,14 +21,17 @@ public class User {
     public interface UserDetailView extends UserSimpleView{};
     private String id;
 
+    @ApiModelProperty(value = "账号")
     //自定义注解
     @MyConstraint(message = "账号必须是tom")
     private String username;
 
+    @ApiModelProperty(value = "密码")
     //不允许password为null
     @NotBlank(message = "密码不能为空")
     private String password;
 
+    @ApiModelProperty(value = "生日")
     //加验证生日必须是过去的时间
     @Past(message = "生日必须是过去的时间")
     private Date birthday;
