@@ -43,11 +43,17 @@ spring:
         login-password: guoadmin
         #是否能按重制按键
         reset-enable: true
-
   #关闭spring session
   session:
     store-type: none
+  jpa:
+    show-sql: true
+    generate-ddl: true
 
+#先关闭security默认配置
+#security:
+#  basic:
+#    enabled: false
 
 #上传文件路径
 uploadfiledir:
@@ -57,3 +63,9 @@ uploadfiledir:
 sys:
   swagger:
     enable-swgger: true
+
+#自定义登陆页面
+guosh:
+  security:
+    browser:
+      loginPage: /demoLogin.html

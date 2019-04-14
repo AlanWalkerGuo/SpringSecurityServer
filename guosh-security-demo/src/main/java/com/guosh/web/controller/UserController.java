@@ -71,7 +71,7 @@ public class UserController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "username", value = "账号")
     })
-    public List<User> query(@RequestParam(name = "username",required = true) String username, @ApiIgnore @PageableDefault(page = 1,size = 20,sort = "username",direction = Sort.Direction.DESC) Pageable pageable){
+    public List<User> query(@RequestParam(name = "username",required = false) String username, @ApiIgnore @PageableDefault(page = 1,size = 20,sort = "username",direction = Sort.Direction.DESC) Pageable pageable){
         List<User>users=new ArrayList();
         users.add(new User("1","aaa","111",null));
         users.add(new User("2","bbb","222",null));
