@@ -2,6 +2,8 @@ package com.guosh.security.browser.web.controller;
 
 import com.guosh.security.browser.domain.SimpleResponse;
 import com.guosh.security.core.properties.SecurityProperties;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.web.DefaultRedirectStrategy;
@@ -21,6 +23,8 @@ import java.io.IOException;
 @RestController
 public class BrowserSecurityController {
 
+    private Logger logger= LoggerFactory.getLogger(getClass());
+
     private RequestCache requestCache=new HttpSessionRequestCache();
 
     private RedirectStrategy redirectStrategy=new DefaultRedirectStrategy();
@@ -38,9 +42,10 @@ public class BrowserSecurityController {
     public SimpleResponse requireAuthentication(HttpServletRequest request, HttpServletResponse response) throws IOException {
         SavedRequest savedRequest=requestCache.getRequest(request,response);
         if(savedRequest!=null){
+            //查询上个页面地址
             String targetUrl = savedRequest.getRedirectUrl();
-            //System.out.println(savedRequest);
             if(StringUtils.endsWithIgnoreCase(targetUrl,".html")){
+                logger.info("跳转登陆页面{}",securityProperties.getBrowser().getLoginPage());
                 redirectStrategy.sendRedirect(request,response,securityProperties.getBrowser().getLoginPage());
             }
         }

@@ -1,5 +1,7 @@
 package com.guosh.security.browser.config;
 
+import com.guosh.security.browser.authentication.BrowserAuthenticationFailureHandler;
+import com.guosh.security.browser.authentication.BrowserAuthenticationSuccessHandler;
 import com.guosh.security.core.properties.SecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -13,6 +15,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private SecurityProperties securityProperties;
+
+    @Autowired
+    private BrowserAuthenticationSuccessHandler browserAuthenticationSuccessHandler;
+
+    @Autowired
+    private BrowserAuthenticationFailureHandler browserAuthenticationFailureHandler;
 
     //密码加密
     @Bean
@@ -30,9 +38,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                     .formLogin() //表单登陆页
                     .loginPage("/login")//登陆页面
-                    .loginProcessingUrl("/authentication/form");//自定义form表单登陆提交地址默认是/login
-
-
+                    .loginProcessingUrl("/authentication/form")//自定义form表单登陆提交地址默认是/login
+                    .successHandler(browserAuthenticationSuccessHandler)//登陆成功后返回json信息
+                    .failureHandler(browserAuthenticationFailureHandler);//登陆失败返回json
 
     }
 }

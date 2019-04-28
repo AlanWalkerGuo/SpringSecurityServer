@@ -48,6 +48,7 @@ spring:
     store-type: none
   jpa:
     show-sql: true
+    #自动创建表结构
     generate-ddl: true
 
 #先关闭security默认配置
@@ -65,7 +66,7 @@ sys:
     enable-swgger: true
 
 #自定义登陆页面
-guosh:
-  security:
-    browser:
-      loginPage: /demoLogin.html
+#guosh:
+#  security:
+#    browser:
+#      loginPage: /demoLogin.html
