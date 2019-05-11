@@ -9,6 +9,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
@@ -17,10 +19,21 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Api(tags = "用户API")
 @RestController
-@RequestMapping(value = "/user")
+@RequestMapping(path = {"/api/user","/user"})
 public class UserController {
+
+
+    @RequestMapping(value = "/me",method = RequestMethod.GET)
+    public Object getLoginUser() {
+        //获取详细登陆信息
+        //SecurityContextHolder.getContext().getAuthentication();
+        //获取用户的登陆信息
+        return ((UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+
+    }
 
     @RequestMapping(method = RequestMethod.POST)
     @JsonView(User.UserSimpleView.class)
@@ -69,7 +82,7 @@ public class UserController {
     @JsonView(User.UserSimpleView.class)
     @ApiOperation(value="用户列表服务")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "username", value = "账号")
+            @ApiImplicitParam(name = "username", value = "账号",paramType = "query")
     })
     public List<User> query(@RequestParam(name = "username",required = false) String username, @ApiIgnore @PageableDefault(page = 1,size = 20,sort = "username",direction = Sort.Direction.DESC) Pageable pageable){
         List<User>users=new ArrayList();

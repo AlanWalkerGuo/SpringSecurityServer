@@ -12,8 +12,6 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-import static com.google.common.base.Predicates.or;
-import static springfox.documentation.builders.PathSelectors.regex;
 
 @Configuration
 @EnableSwagger2
@@ -27,8 +25,8 @@ public class Swagger2Config {
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.guosh.web"))  //swgger插件作用范围
-                 //.paths(PathSelectors.regex("/api/.*"))
-                .paths(PathSelectors.any()) //过滤接口
+                 .paths(PathSelectors.regex("/api/.*"))
+                //.paths(PathSelectors.any()) //过滤接口
                 .build();
     }
 

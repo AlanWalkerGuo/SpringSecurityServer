@@ -8,8 +8,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import javax.annotation.Resource;
 
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -22,6 +26,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private BrowserAuthenticationFailureHandler browserAuthenticationFailureHandler;
 
+
+    @Autowired
+    private SessionRegistry sessionRegistry;
+
+    @Bean
+    public SessionRegistry sessionRegistry() {
+        return new SessionRegistryImpl();
+    }
+
     //密码加密
     @Bean
     public PasswordEncoder passwordEncoder(){
@@ -33,14 +46,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()//关闭跨站防护
                 .authorizeRequests()//下面授权配置
-                    .antMatchers("/login",securityProperties.getBrowser().getLoginPage()).permitAll()//login请求除外不需要认证
+                    .antMatchers("/login",securityProperties.getBrowser().getLoginPage(),"/code/image").permitAll()//login请求除外不需要认证
                     .anyRequest().authenticated()//所有请求都需要身份认证
                 .and()
                     .formLogin() //表单登陆页
                     .loginPage("/login")//登陆页面
                     .loginProcessingUrl("/authentication/form")//自定义form表单登陆提交地址默认是/login
-                    .successHandler(browserAuthenticationSuccessHandler)//登陆成功后返回json信息
-                    .failureHandler(browserAuthenticationFailureHandler);//登陆失败返回json
+                    .successHandler(browserAuthenticationSuccessHandler)//自定义登陆成功后返回json信息
+                    .failureHandler(browserAuthenticationFailureHandler)//自定义登陆失败返回json
+                .and()
+                    .sessionManagement().maximumSessions(1).sessionRegistry(sessionRegistry).expiredUrl("/login");
 
     }
 }

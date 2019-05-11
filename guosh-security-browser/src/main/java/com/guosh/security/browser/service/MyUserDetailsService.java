@@ -30,6 +30,11 @@ public class MyUserDetailsService implements UserDetailsService {
         //第三个参数是账号是否可用，第四个参数是账号是否过期
         //第五个参数是密码是否过期，第六个参数账号是否锁定
         //第七个参数账号到权限
+        com.guosh.security.browser.domain.User user=userRepository.findByUsername(username);
+        if(user==null){
+            throw new UsernameNotFoundException(username);
+        }
+
         return new User(username,userRepository.findByUsername(username).getPassword(),
                 true,true,true,userRepository.findByUsername(username).getIsAccountNonLocked(),
                 AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
