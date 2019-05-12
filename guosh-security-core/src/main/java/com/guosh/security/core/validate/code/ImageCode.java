@@ -19,6 +19,10 @@ public class ImageCode {
         //当前时间加上过期秒数
         this.exireTime = LocalDateTime.now().plusSeconds(exireIn);
     }
+    //判断时间是否过期
+    public boolean isExpried(){
+        return LocalDateTime.now().isAfter(exireTime);
+    }
 
     public BufferedImage getImage() {
         return image;

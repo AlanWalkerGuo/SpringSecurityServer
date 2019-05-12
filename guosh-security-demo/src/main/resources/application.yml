@@ -73,3 +73,9 @@ guosh:
       #loginPage: /demoLogin.html
       #JSON异步登陆 REDITECT同步登陆
       loginType: JSON
+
+    code:
+      #image下面的属性有width,height,length,expreIn,url
+      image:
+        length: 5
+        #url: /user/*

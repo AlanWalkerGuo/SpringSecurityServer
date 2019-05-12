@@ -1,6 +1,7 @@
 package com.guosh.security.browser.authentication;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.guosh.security.browser.domain.SimpleResponse;
 import com.guosh.security.core.properties.LoginType;
 import com.guosh.security.core.properties.SecurityProperties;
 import org.slf4j.Logger;
@@ -37,7 +38,7 @@ public class BrowserAuthenticationFailureHandler extends SimpleUrlAuthentication
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
             response.setContentType("application/json;charset=UTF-8");
             //转json字符串返回
-            response.getWriter().write(objectMapper.writeValueAsString(e));
+            response.getWriter().write(objectMapper.writeValueAsString(new SimpleResponse(e.getMessage())));
         }else{
             super.onAuthenticationFailure(request,response,e);
         }
