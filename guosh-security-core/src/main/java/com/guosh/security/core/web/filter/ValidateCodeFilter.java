@@ -37,6 +37,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
 
     private AntPathMatcher antPathMatcher=new AntPathMatcher();
 
+    //初始化加载
     @Override
     public void afterPropertiesSet() throws ServletException {
         super.afterPropertiesSet();
