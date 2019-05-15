@@ -1,8 +1,8 @@
-package com.guosh.domain;
+package com.guosh.demo.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.guosh.validator.MyConstraint;
+import com.guosh.demo.validator.MyConstraint;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
