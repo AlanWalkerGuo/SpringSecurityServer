@@ -44,10 +44,10 @@ public class BrowserSecurityController {
         if(savedRequest!=null){
             //查询上个页面地址
             String targetUrl = savedRequest.getRedirectUrl();
-            if(StringUtils.endsWithIgnoreCase(targetUrl,".html")){
+            //if(StringUtils.endsWithIgnoreCase(targetUrl,".html")){
                 logger.info("跳转登陆页面{}",securityProperties.getBrowser().getLoginPage());
                 redirectStrategy.sendRedirect(request,response,securityProperties.getBrowser().getLoginPage());
-            }
+            //}
         }
         return new SimpleResponse("访问服务需要身份认证,请引导用户到登陆页");
     }

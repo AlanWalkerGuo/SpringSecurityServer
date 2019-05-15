@@ -1,4 +1,4 @@
-package com.guosh.dto;
+package com.guosh.demo.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

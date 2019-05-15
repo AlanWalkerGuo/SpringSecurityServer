@@ -1,4 +1,4 @@
-package com.guosh.web.controller;
+package com.guosh.demo.web.controller;
 
 import org.junit.Before;
 import org.junit.Test;
