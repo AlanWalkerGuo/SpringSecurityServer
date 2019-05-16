@@ -53,22 +53,26 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        boolean action = false;
-        //用antPathMatcher工具栏判断路径是否符合
-        for (String url:urls) {
-            if(antPathMatcher.match(url,request.getServletPath())){
-                action=true;
+        String codeInRequest=ServletRequestUtils.getStringParameter(request,"imageCode");
+        //验证码不等于null再进行验证前端需要处理登陆失败再传验证码
+        if(StringUtils.isNotBlank(codeInRequest)) {
+            boolean action = false;
+            //用antPathMatcher工具栏判断路径是否符合
+            for (String url : urls) {
+                if (antPathMatcher.match(url, request.getServletPath())) {
+                    action = true;
+                }
             }
-        }
 
-        //必须是登陆请求并且是post请求
-        if(action){
-            try {
-                //校验验证码
-                validate(new ServletWebRequest(request));
-            }catch (ValidateCodeException e){
-                authenticationFailureHandler.onAuthenticationFailure(request,response,e);
-                return;
+            //必须是登陆请求并且是post请求
+            if (action) {
+                try {
+                    //校验验证码
+                    validate(new ServletWebRequest(request));
+                } catch (ValidateCodeException e) {
+                    authenticationFailureHandler.onAuthenticationFailure(request, response, e);
+                    return;
+                }
             }
         }
         filterChain.doFilter(request,response);
