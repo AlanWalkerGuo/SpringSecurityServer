@@ -3,6 +3,7 @@
  */
 package com.guosh.basic.repository;
 
+import com.guosh.demo.web.config.MixPropertySourceFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
@@ -16,7 +17,7 @@ import java.util.Map;
  */
 @Component
 @ConfigurationProperties(prefix="nativesql")
-@PropertySource("classpath:sql.yml")
+@PropertySource(value = {"classpath:sql.yml"},factory = MixPropertySourceFactory.class)
 public class SqlMap {
 	private Map<String, String> sqls = new HashMap<>();
 	

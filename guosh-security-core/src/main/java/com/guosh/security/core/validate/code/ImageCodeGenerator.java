@@ -12,7 +12,7 @@ import java.util.Random;
 
 public class ImageCodeGenerator implements ValidateCodeGenerator{
 
-    @Autowired
+
     private SecurityProperties securityProperties;
 
     @Override
