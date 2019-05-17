@@ -49,7 +49,7 @@ spring:
   jpa:
     show-sql: true
     #自动创建表结构
-    generate-ddl: true
+    generate-ddl: false
 
 
 #上传文件路径
@@ -65,10 +65,10 @@ sys:
 guosh:
   security:
     browser:
-      #自定义登陆页面
-      #loginPage: /demoLogin.html
-      #JSON异步登陆 REDITECT同步登陆
-      loginType: JSON
+      #loginPage: /demoLogin.html  #自定义登陆页面默认defaultLogin.html
+      loginType: JSON  #JSON异步登陆 REDITECT同步登陆
+      #rememberMeSeconds: 3600  #设置机制密码失效时间单位(秒)默认一小时
+
 
     code:
       #image下面的属性有width,height,length,expreIn,url

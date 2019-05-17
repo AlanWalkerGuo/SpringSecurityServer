@@ -171,14 +171,20 @@ $(function(){
 	// 登录点击事件
 	function sendBtn(){
 		var code='';
+		var rememberme=false;
 		//普通登陆
 		if (tab == 'account_number') {
 			$(".log-btn").click(function(){
 				// var type = 'phone';
 				var inp = $.trim($('#num').val());
 				var pass = $.trim($('#pass').val());
+				if($('#remember-me').is(':checked')){
+					rememberme=true;
+				}
+
 				//验证账号密码是否是空
 				if (checkAccount(inp) && checkPass(pass)) {
+					//判断验证码是否为空
 					if (!$('.code').hasClass('hide')) {
 						 code = $.trim($('#veri').val());
 						if (!checkCode(code)) {
@@ -189,12 +195,12 @@ $(function(){
 			            url: projectName+'/authentication/form',
 			            type: 'post',
 			            dataType: 'json',
-			            data: "username="+inp+"&password="+pass+"&imageCode="+code,
+			            data: "username="+inp+"&password="+pass+"&imageCode="+code+"&remember-me="+rememberme,
 			            success:function(response){
 							var url=window.location.href;
 							if(url.indexOf('#')!=-1){
-								// window.location.href=projectName+url.substring(url.indexOf('#'))
-								window.history.back();
+								window.location.href=projectName+url.substring(url.indexOf('#'))
+								//window.history.back();
 							}else{
 								window.location.href=projectName+"/#/";
 							}
