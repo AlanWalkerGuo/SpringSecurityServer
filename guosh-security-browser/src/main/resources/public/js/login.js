@@ -1,6 +1,10 @@
-var projectName="/guoshsecurity";
+var projectName="";
 
 $(function(){
+	//获取项目名
+	var pathName=window.document.location.pathname
+	projectName=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
+
 	var tab = 'account_number';
 	// 选项卡切换
 	$(".account_number").click(function () {
