@@ -132,29 +132,30 @@ $(function(){
 			$('.num2-err').text('手机号不合法，请重新输入');
 			return false;
 		}
-		$.ajax({
-            url: '/checkPhone',
-            type: 'post',
-            dataType: 'json',
-            async: false,
-            data: {phone:phone,type:"login"},
-            success:function(data){
-                if (data.code == '0') {
-                    $('.num2-err').addClass('hide');
-                    // console.log('aa');
-                    // return true;
-                } else {
-                    $('.num2-err').removeClass('hide').text(data.msg);
-                    // console.log('bb');
-					status = false;
-					// return false;
-                }
-            },
-            error:function(){
-            	status = false;
-                // return false;
-            }
-        });
+		//检查手机号是否合法
+		// $.ajax({
+        //     url: '/checkPhone',
+        //     type: 'post',
+        //     dataType: 'json',
+        //     async: false,
+        //     data: {phone:phone,type:"login"},
+        //     success:function(data){
+        //         if (data.code == '0') {
+        //             $('.num2-err').addClass('hide');
+        //             // console.log('aa');
+        //             // return true;
+        //         } else {
+        //             $('.num2-err').removeClass('hide').text(data.msg);
+        //             // console.log('bb');
+		// 			status = false;
+		// 			// return false;
+        //         }
+        //     },
+        //     error:function(){
+        //     	status = false;
+        //         // return false;
+        //     }
+        // });
 		return status;
 	}
 
@@ -307,14 +308,13 @@ $(function(){
 
 
 	$(".form-data").delegate(".send","click",function () {
-		var phone = $.trim($('#num2').val());
-		if (checkPhone(phone)) {
+		var mobile = $.trim($('#num2').val());
+		if (checkPhone(mobile)) {
 				$.ajax({
-		            url: '/getcode',
-		            type: 'post',
+		            url: projectName + '/code/sms',
+		            type: 'get',
 		            dataType: 'json',
-		            async: true,
-		            data: {phone:phone,type:"login"},
+		            data: {mobile:mobile},
 		            success:function(data){
 		                if (data.code == '0') {
 		                    

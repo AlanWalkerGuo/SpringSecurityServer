@@ -1,6 +1,6 @@
 package com.guosh.demo.web.code;
 
-import com.guosh.security.core.validate.code.ImageCode;
+import com.guosh.security.core.validate.code.image.ImageCode;
 import com.guosh.security.core.validate.code.ValidateCodeGenerator;
 import org.springframework.web.context.request.ServletWebRequest;
 

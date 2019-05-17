@@ -1,7 +1,7 @@
 package com.guosh.security.core.web.filter;
 
 import com.guosh.security.core.properties.SecurityProperties;
-import com.guosh.security.core.validate.code.ImageCode;
+import com.guosh.security.core.validate.code.image.ImageCode;
 import com.guosh.security.core.web.controller.ValidateCodeController;
 import com.guosh.security.core.web.exception.ValidateCodeException;
 import org.apache.commons.lang.StringUtils;

@@ -86,7 +86,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()//关闭跨站防护
                 .addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class)//在登陆拦截之前添加验证码拦截器
                 .authorizeRequests()//下面授权配置
-                    .antMatchers("/login",securityProperties.getBrowser().getLoginPage(),"/code/image").permitAll()//login请求除外不需要认证
+                    .antMatchers("/login",securityProperties.getBrowser().getLoginPage(),"/code/image","/code/sms").permitAll()//login请求除外不需要认证
                     .anyRequest().authenticated()//所有请求都需要身份认证
                     .and()
                 .formLogin() //表单登陆

@@ -1,5 +1,7 @@
 package com.guosh.security.core.properties;
 
+import com.guosh.security.core.properties.browser.BrowserProperties;
+import com.guosh.security.core.properties.code.ValidateCodeProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "guosh.security")

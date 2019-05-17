@@ -1,35 +1,30 @@
 package com.guosh.security.core.validate.code;
 
 
-import java.awt.image.BufferedImage;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class ImageCode {
-
-    //验证码图片
-    private BufferedImage image;
+public class ValidateCode implements Serializable {
     //随机数
     private String code;
     //失效时间
     private LocalDateTime exireTime;
 
-    public ImageCode(BufferedImage image, String code, int exireIn) {
-        this.image = image;
+    public ValidateCode(String code, int exireIn) {
         this.code = code;
         //当前时间加上过期秒数
         this.exireTime = LocalDateTime.now().plusSeconds(exireIn);
     }
+
+    public ValidateCode(String code, LocalDateTime exireTime) {
+        this.code = code;
+        //当前时间加上过期秒数
+        this.exireTime = exireTime;
+
+    }
     //判断时间是否过期
     public boolean isExpried(){
         return LocalDateTime.now().isAfter(exireTime);
-    }
-
-    public BufferedImage getImage() {
-        return image;
-    }
-
-    public void setImage(BufferedImage image) {
-        this.image = image;
     }
 
     public String getCode() {

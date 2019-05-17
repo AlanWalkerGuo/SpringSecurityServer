@@ -3,7 +3,7 @@ package com.guosh.security.browser.authentication;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.guosh.security.core.properties.LoginType;
+import com.guosh.security.core.properties.browser.LoginType;
 import com.guosh.security.core.properties.SecurityProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.ServletRequestUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

@@ -2,16 +2,14 @@ package com.guosh.security.browser.authentication;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.guosh.security.browser.domain.SimpleResponse;
-import com.guosh.security.core.properties.LoginType;
+import com.guosh.security.core.properties.browser.LoginType;
 import com.guosh.security.core.properties.SecurityProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
-import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletException;

@@ -1,32 +1,15 @@
-package com.guosh.security.core.properties;
+package com.guosh.security.core.properties.code;
 
 
-public class ImageCodeProperties {
-    //默认验证码宽度
-    private int width = 67;
-    //默认验证码高度
-    private int height = 23;
+public class SmsCodeProperties {
+
     //默认验证码位数
-    private int length = 4;
+    private int length = 6;
     //默认验证码失效时间
     private int expreIn= 60;
     //哪些url地址需要验证码拦截
     private String url;
-    public int getWidth() {
-        return width;
-    }
 
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
-    }
 
     public int getLength() {
         return length;

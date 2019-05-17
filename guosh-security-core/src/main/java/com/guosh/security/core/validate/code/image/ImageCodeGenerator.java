@@ -1,7 +1,8 @@
-package com.guosh.security.core.validate.code;
+package com.guosh.security.core.validate.code.image;
 
 import com.guosh.security.core.properties.SecurityProperties;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.guosh.security.core.validate.code.ValidateCodeGenerator;
+import com.guosh.security.core.validate.code.image.ImageCode;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.context.request.ServletWebRequest;
 
@@ -10,7 +11,7 @@ import java.awt.image.BufferedImage;
 import java.util.Random;
 
 
-public class ImageCodeGenerator implements ValidateCodeGenerator{
+public class ImageCodeGenerator implements ValidateCodeGenerator {
 
 
     private SecurityProperties securityProperties;

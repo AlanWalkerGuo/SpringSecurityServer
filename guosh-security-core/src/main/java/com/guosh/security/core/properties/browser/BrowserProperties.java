@@ -1,4 +1,4 @@
-package com.guosh.security.core.properties;
+package com.guosh.security.core.properties.browser;
 
 public class BrowserProperties {
 
