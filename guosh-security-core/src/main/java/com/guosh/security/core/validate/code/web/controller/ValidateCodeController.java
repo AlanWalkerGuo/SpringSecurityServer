@@ -1,9 +1,9 @@
-package com.guosh.security.core.web.controller;
+package com.guosh.security.core.validate.code.web.controller;
 
 
-import com.guosh.security.core.validate.code.image.ImageCode;
 import com.guosh.security.core.validate.code.ValidateCode;
 import com.guosh.security.core.validate.code.ValidateCodeGenerator;
+import com.guosh.security.core.validate.code.image.ImageCode;
 import com.guosh.security.core.validate.code.sms.SmsCodeSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.web.HttpSessionSessionStrategy;
@@ -18,7 +18,6 @@ import org.springframework.web.context.request.ServletWebRequest;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import java.io.IOException;
 
 

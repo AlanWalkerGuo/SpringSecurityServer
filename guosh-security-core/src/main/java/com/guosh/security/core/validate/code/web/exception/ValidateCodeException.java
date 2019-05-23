@@ -1,4 +1,4 @@
-package com.guosh.security.core.web.exception;
+package com.guosh.security.core.validate.code.web.exception;
 
 import org.springframework.security.core.AuthenticationException;
 

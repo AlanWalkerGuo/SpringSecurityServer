@@ -1,13 +1,12 @@
-package com.guosh.security.core.web.filter;
+package com.guosh.security.core.validate.code.web.filter;
 
 import com.guosh.security.core.properties.SecurityProperties;
 import com.guosh.security.core.validate.code.image.ImageCode;
-import com.guosh.security.core.web.controller.ValidateCodeController;
-import com.guosh.security.core.web.exception.ValidateCodeException;
+import com.guosh.security.core.validate.code.web.controller.ValidateCodeController;
+import com.guosh.security.core.validate.code.web.exception.ValidateCodeException;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
-
 import org.springframework.social.connect.web.HttpSessionSessionStrategy;
 import org.springframework.social.connect.web.SessionStrategy;
 import org.springframework.util.AntPathMatcher;
