@@ -265,9 +265,9 @@ $(function(){
 				// var type = 'phone';
 				var phone = $.trim($('#num2').val());
 				var pcode = $.trim($('#veri-code').val());
-				if (checkPhone(phone) && checkPass(pcode)) {
+				if (checkPhone(phone) && checkPhoneCode(pcode)) {
 					$.ajax({
-			            url: '/plogin',
+			            url: projectName+'/authentication/mobile',
 			            type: 'post',
 			            dataType: 'json',
 			            async: true,

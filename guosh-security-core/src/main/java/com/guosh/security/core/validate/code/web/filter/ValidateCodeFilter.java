@@ -79,7 +79,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
 
     private void validate(ServletWebRequest request) throws ServletRequestBindingException {
         //从session获取验证码
-        ImageCode codeInSession=(ImageCode) sessionStrategy.getAttribute(request, ValidateCodeController.SESSION_KEY);
+        ImageCode codeInSession=(ImageCode) sessionStrategy.getAttribute(request, "SESSION_KEY_FOR_CODE_IMAGE");
         //从请求里获取验证码
         String codeInRequest=ServletRequestUtils.getStringParameter(request.getRequest(),"imageCode");
 
@@ -91,14 +91,14 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
         }
         //判断验证码时间是否过期
         if(codeInSession.isExpried()){
-            sessionStrategy.removeAttribute(request, ValidateCodeController.SESSION_KEY);
+            sessionStrategy.removeAttribute(request, "SESSION_KEY_FOR_CODE_IMAGE");
             throw new ValidateCodeException("验证码已经过期");
         }
         //比对验证码
         if(!StringUtils.equalsIgnoreCase(codeInSession.getCode(),codeInRequest)){
             throw new ValidateCodeException("验证码不匹配");
         }
-        sessionStrategy.removeAttribute(request, ValidateCodeController.SESSION_KEY);
+        sessionStrategy.removeAttribute(request, "SESSION_KEY_FOR_CODE_IMAGE");
     }
 
     public AuthenticationFailureHandler getAuthenticationFailureHandler() {

@@ -20,8 +20,8 @@ public class ValidateCodeBeanConfig {
      * @return
      */
     @Bean
-    @ConditionalOnMissingBean(name = "imageCodeGenerator")//在spring加载bean时会先查找有没有名字为imageCodeGenerator
-    public ValidateCodeGenerator imageCodeGenerator(){
+    @ConditionalOnMissingBean(name = "imageValidateCodeGenerator")//在spring加载bean时会先查找有没有名字为imageCodeGenerator
+    public ValidateCodeGenerator imageValidateCodeGenerator(){
         ImageCodeGenerator codeGenerator=new ImageCodeGenerator();
         codeGenerator.setSecurityProperties(securityProperties);
         return codeGenerator;

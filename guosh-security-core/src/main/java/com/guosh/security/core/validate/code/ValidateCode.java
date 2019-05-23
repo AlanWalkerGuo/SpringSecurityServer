@@ -8,23 +8,23 @@ public class ValidateCode implements Serializable {
     //随机数
     private String code;
     //失效时间
-    private LocalDateTime exireTime;
+    private LocalDateTime expireTime;
 
     public ValidateCode(String code, int exireIn) {
         this.code = code;
         //当前时间加上过期秒数
-        this.exireTime = LocalDateTime.now().plusSeconds(exireIn);
+        this.expireTime = LocalDateTime.now().plusSeconds(exireIn);
     }
 
     public ValidateCode(String code, LocalDateTime exireTime) {
         this.code = code;
         //当前时间加上过期秒数
-        this.exireTime = exireTime;
+        this.expireTime = exireTime;
 
     }
     //判断时间是否过期
     public boolean isExpried(){
-        return LocalDateTime.now().isAfter(exireTime);
+        return LocalDateTime.now().isAfter(expireTime);
     }
 
     public String getCode() {
@@ -35,11 +35,11 @@ public class ValidateCode implements Serializable {
         this.code = code;
     }
 
-    public LocalDateTime getExireTime() {
-        return exireTime;
+    public LocalDateTime getExpireTime() {
+        return expireTime;
     }
 
-    public void setExireTime(LocalDateTime exireTime) {
-        this.exireTime = exireTime;
+    public void setExpireTime(LocalDateTime expireTime) {
+        this.expireTime = expireTime;
     }
 }

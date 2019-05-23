@@ -10,7 +10,7 @@ import org.springframework.data.repository.NoRepositoryBean;
 import java.io.Serializable;
 
 /**
- * @author audin
+ * @author guoshaohua
  *
  */
 @NoRepositoryBean

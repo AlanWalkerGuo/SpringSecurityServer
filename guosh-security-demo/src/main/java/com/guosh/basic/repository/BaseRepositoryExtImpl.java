@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author audin
+ * @author guoshaohua
  *
  */
 public abstract class BaseRepositoryExtImpl implements BaseRepositoryExt {

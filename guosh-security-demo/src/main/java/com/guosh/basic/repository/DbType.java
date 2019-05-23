@@ -4,7 +4,7 @@
 package com.guosh.basic.repository;
 
 /**
- * @author audin
+ * @author guoshaohua
  *
  */
 public enum DbType {

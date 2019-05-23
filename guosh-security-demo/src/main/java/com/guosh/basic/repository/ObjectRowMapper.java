@@ -17,7 +17,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 将结果集的行数据转换为对象
- * @author audin
+ * @author guoshaohua
  *
  */
 public class ObjectRowMapper<T> implements RowMapper<T> {
