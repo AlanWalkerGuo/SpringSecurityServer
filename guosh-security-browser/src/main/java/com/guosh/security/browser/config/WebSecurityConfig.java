@@ -3,12 +3,11 @@ package com.guosh.security.browser.config;
 import com.guosh.security.browser.authentication.BrowserAuthenticationFailureHandler;
 import com.guosh.security.browser.authentication.BrowserAuthenticationSuccessHandler;
 import com.guosh.security.core.properties.SecurityProperties;
-import com.guosh.security.core.web.filter.ValidateCodeFilter;
+import com.guosh.security.core.validate.code.web.filter.ValidateCodeFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
@@ -19,7 +18,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
-import javax.annotation.Resource;
+
 import javax.sql.DataSource;
 
 @Configuration
@@ -65,7 +64,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
         tokenRepository.setDataSource(dataSource);
         //启动自动创建persistent_logins表
-        //tokenRepository.setCreateTableOnStartup(true);
+        tokenRepository.setCreateTableOnStartup(true);
         return tokenRepository;
     }
 
