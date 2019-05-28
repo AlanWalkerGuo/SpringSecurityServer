@@ -263,32 +263,28 @@ $(function(){
 			//手机登陆
 			$(".log-btn").click(function(){
 				// var type = 'phone';
-				var phone = $.trim($('#num2').val());
-				var pcode = $.trim($('#veri-code').val());
-				if (checkPhone(phone) && checkPhoneCode(pcode)) {
+				var mobile = $.trim($('#num2').val());
+				var smsCode = $.trim($('#veri-code').val());
+				if (checkPhone(mobile) && checkPhoneCode(smsCode)) {
 					$.ajax({
 			            url: projectName+'/authentication/mobile',
 			            type: 'post',
 			            dataType: 'json',
 			            async: true,
-			            data: {phone:phone,code:pcode},
+			            data: {'mobile':mobile,'smsCode':smsCode},
 			            success:function(data){
-			                if (data.code == '0') {
-			                	// globalTip({'msg':'登录成功!','setTime':3,'jump':true,'URL':'http://www.ui.cn'});
-			                	globalTip(data.msg);
-			                } else if(data.code == '1') {
-			                	$(".log-btn").off('click').addClass("off");
-			                    $('.num2-err').removeClass('hide').text(data.msg);
-			                    return false;
-			                } else if(data.code == '2') {
-			                	$(".log-btn").off('click').addClass("off");
-			                    $('.error').removeClass('hide').text(data.msg);
-			                    return false;
-			                }
+							var url=window.location.href;
+							if(url.indexOf('#')!=-1){
+								window.location.href=projectName+url.substring(url.indexOf('#'))
+								//window.history.back();
+							}else{
+								window.location.href=projectName+"/#/";
+							}
 			            },
-			            error:function(){
-			                
-			            }
+			            error:function(e){
+							$(".log-btn").off('click').addClass("off");
+							$('.error').removeClass('hide').text(e.responseJSON.object);
+					}
 			        });
 				} else {
 					$(".log-btn").off('click').addClass("off");

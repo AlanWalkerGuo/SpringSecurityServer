@@ -2,7 +2,9 @@ package com.guosh.security.browser.config;
 
 import com.guosh.security.browser.authentication.BrowserAuthenticationFailureHandler;
 import com.guosh.security.browser.authentication.BrowserAuthenticationSuccessHandler;
+import com.guosh.security.core.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
 import com.guosh.security.core.properties.SecurityProperties;
+import com.guosh.security.core.validate.code.web.filter.SmsCodeFilter;
 import com.guosh.security.core.validate.code.web.filter.ValidateCodeFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -34,6 +36,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     //处理登陆失败
     @Autowired
     private BrowserAuthenticationFailureHandler browserAuthenticationFailureHandler;
+
+
+    @Autowired
+    private SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
 
     //数据源
     @Autowired
@@ -81,9 +87,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         //初始化方法
         validateCodeFilter.afterPropertiesSet();
 
+        //验证码拦截器
+        SmsCodeFilter smsCodeFilter=new SmsCodeFilter();
+        //处理失败异常
+        smsCodeFilter.setAuthenticationFailureHandler(browserAuthenticationFailureHandler);
+        //把配置放进去
+        smsCodeFilter.setSecurityProperties(securityProperties);
+        //初始化方法
+        smsCodeFilter.afterPropertiesSet();
+
+
         http
                 .csrf().disable()//关闭跨站防护
+                .apply(smsCodeAuthenticationSecurityConfig) //
+                    .and()
                 .addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class)//在登陆拦截之前添加验证码拦截器
+                .addFilterBefore(smsCodeFilter, UsernamePasswordAuthenticationFilter.class)//在登陆拦截之前添加验证码拦截器
                 .authorizeRequests()//下面授权配置
                     .antMatchers("/login",securityProperties.getBrowser().getLoginPage(),"/code/*").permitAll()//login请求除外不需要认证
                     .anyRequest().authenticated()//所有请求都需要身份认证

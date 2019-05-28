@@ -29,6 +29,8 @@ public class User{
     @Column(name = "is_enabled")
     private boolean isEnabled;
 
+    private String mobile;
+
     public User() {
     }
 

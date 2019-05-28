@@ -12,5 +12,5 @@ public interface UserRepository extends BaseDao<User,String> {
      * @param username
      * @return
      */
-    public User findByUsername(String username);
+    public User findByUsernameOrMobile(String username,String mobile);
 }
