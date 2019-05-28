@@ -68,7 +68,7 @@ guosh:
     browser:
       #loginPage: /demoLogin.html  #自定义登陆页面默认defaultLogin.html
       loginType: JSON  #JSON异步登陆 REDITECT同步登陆
-      #rememberMeSeconds: 3600  #设置机制密码失效时间单位(秒)默认一小时
+      #rememberMeSeconds: 3600  #设置记住密码失效时间单位(秒)默认一小时
     #验证码相关配置
     code:
       #图形验证码配置属性:width,height,length,expreIn,url
