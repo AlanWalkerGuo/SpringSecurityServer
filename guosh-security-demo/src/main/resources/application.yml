@@ -50,7 +50,9 @@ spring:
     show-sql: true
     #自动创建表结构
     generate-ddl: false
-
+  redis:
+    host: 106.13.47.59
+    port: 6379
 
 #上传文件路径
 uploadfiledir:
