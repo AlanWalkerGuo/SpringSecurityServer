@@ -2,19 +2,25 @@ package com.guosh.demo.web.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.guosh.demo.domain.User;
+import com.guosh.demo.repository.UserRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.social.connect.web.ProviderSignInUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.ServletWebRequest;
 import springfox.documentation.annotations.ApiIgnore;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +30,30 @@ import java.util.List;
 @RestController
 @RequestMapping(path = {"/api/user","/user"})
 public class UserController {
+    @Autowired
+    private ProviderSignInUtils providerSignInUtils;
+
+    @Autowired
+     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    //注册或者绑定逻辑
+    @RequestMapping(value = "/regist",method = RequestMethod.POST)
+    public void regist(String username, String password, HttpServletRequest request) {
+        String id=null;
+        User user= userRepository.findByUsernameOrMobile(username,username);
+        if(user!=null){
+            id=user.getId();
+        }else{
+            User addUser =new User();
+            addUser.setUsername(username);
+            addUser.setPassword(passwordEncoder.encode(password));
+            id=userRepository.save(addUser).getId();
+        }
+        providerSignInUtils.doPostSignUp(id,new ServletWebRequest(request));
+    }
 
 
     @RequestMapping(value = "/me",method = RequestMethod.GET)
@@ -86,9 +116,9 @@ public class UserController {
     })
     public List<User> query(@RequestParam(name = "username",required = false) String username, @ApiIgnore @PageableDefault(page = 1,size = 20,sort = "username",direction = Sort.Direction.DESC) Pageable pageable){
         List<User>users=new ArrayList();
-        users.add(new User("1","aaa","111",null));
-        users.add(new User("2","bbb","222",null));
-        users.add(new User("3","ddd","333",null));
+//        users.add(new User("1","aaa","111",null));
+//        users.add(new User("2","bbb","222",null));
+//        users.add(new User("3","ddd","333",null));
         return users;
     }
 

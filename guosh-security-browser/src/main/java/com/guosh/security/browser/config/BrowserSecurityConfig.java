@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.social.security.SpringSocialConfigurer;
 
 import javax.sql.DataSource;
 
@@ -43,6 +44,9 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsService userDetailsService;
 
+    //第三方登陆
+    @Autowired
+    private SpringSocialConfigurer sociaSecurityConfig;
 
     //数据源
     @Autowired
@@ -67,12 +71,15 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                     .and()
                 .apply(smsCodeAuthenticationSecurityConfig)//手机验证码登陆
                     .and()
+                .apply(sociaSecurityConfig) //第三方登陆
+                    .and()
                 .authorizeRequests()//下面授权配置
                     .antMatchers(
                             SecurityConstants.DEFAULT_UNAUTHENTICATION_URL, //处理登陆请求
                             SecurityConstants.DEFAULT_SIGN_IN_PROCESSING_URL_MOBILE, //手机登陆
                             securityProperties.getBrowser().getLoginPage(), //登陆页面
-                            SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*") //验证码
+                            securityProperties.getBrowser().getSignUpUrl(), //注册页面
+                            SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*","/user/regist") //验证码
                             .permitAll()//login请求除外不需要认证
                     .anyRequest()
                     .authenticated()//所有请求都需要身份认证

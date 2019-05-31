@@ -1,6 +1,6 @@
-package com.guosh.security.browser.service;
+package com.guosh.demo.security;
 
-import com.guosh.security.browser.repository.UserRepository;
+import com.guosh.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
@@ -8,17 +8,20 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.social.security.SocialUser;
+import org.springframework.social.security.SocialUserDetails;
+import org.springframework.social.security.SocialUserDetailsService;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MyUserDetailsService implements UserDetailsService {
+public class MyUserDetailsService implements UserDetailsService , SocialUserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
 
-    //认证登陆
+    //表单登陆
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         //isAccountNonExpired 账号是否过期
@@ -30,24 +33,32 @@ public class MyUserDetailsService implements UserDetailsService {
         //第三个参数是账号是否可用，第四个参数是账号是否过期
         //第五个参数是密码是否过期，第六个参数账号是否锁定
         //第七个参数账号到权限
-        com.guosh.security.browser.domain.User user=userRepository.findByUsernameOrMobile(username,username);
+        com.guosh.demo.domain.User user=userRepository.findByUsernameOrMobile(username,username);
         if(user==null){
             throw new UsernameNotFoundException(username);
         }
 
         return new User(username,userRepository.findByUsernameOrMobile(username,username).getPassword(),
-                true,true,true,userRepository.findByUsernameOrMobile(username,username).getIsAccountNonLocked(),
+                true,true,true,userRepository.findByUsernameOrMobile(username,username).isAccountNonLocked(),
                 AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
     }
-    //模拟注册
-    public void register(){
-        com.guosh.security.browser.domain.User user=new com.guosh.security.browser.domain.User();
-        user.setUsername("ceshi");
-        //存入加密后的密码
-        user.setPassword(passwordEncoder.encode("123456"));
-        user.setIsEnabled(true);
-        user.setIsAccountNonLocked(true);
-        userRepository.save(user);
-    }
 
+
+    /**
+     * 第三方登录
+     * @param userId
+     * @return
+     * @throws UsernameNotFoundException
+     */
+    @Override
+    public SocialUserDetails loadUserByUserId(String userId) throws UsernameNotFoundException {
+        com.guosh.demo.domain.User user=userRepository.findOne(userId);
+        if(user==null){
+            throw new UsernameNotFoundException(userId);
+        }
+
+        return new SocialUser(userId,userRepository.findOne(userId).getPassword(),
+                true,true,true,userRepository.findOne(userId).isAccountNonLocked(),
+                AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
+    }
 }

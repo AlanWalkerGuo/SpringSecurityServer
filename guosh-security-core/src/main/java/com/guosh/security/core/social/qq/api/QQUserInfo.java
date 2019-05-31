@@ -4,7 +4,16 @@ package com.guosh.security.core.social.qq.api;
  * @Author: Guosh
  * @Date: 2019-05-29 11:43
  */
-public class QQUserInfo {
+public class QQUserInfo  {
+    /**
+     *QQ
+     */
+    private String openId;
+
+    private String constellation;
+
+    private String is_lost;
+
     /**
      * 	返回码
      */
@@ -19,6 +28,27 @@ public class QQUserInfo {
      */
     private String nickname;
     /**
+     * 出生年
+     */
+    private String year;
+
+    /**
+     * 性别默认男
+     */
+    String gender;
+    /**
+     * 省
+     */
+    String province;
+
+    /**
+     * 市
+     */
+    private String city;
+
+    private String figureurl_type;
+
+    /**
      * 	大小为30×30像素的QQ空间头像URL。
      */
     private String figureurl;
@@ -26,6 +56,59 @@ public class QQUserInfo {
      * 	大小为50×50像素的QQ空间头像URL。
      */
     private String figureurl_1;
+
+    /**
+     * 	大小为100×100像素的QQ空间头像URL。
+     */
+    private String figureurl_2;
+
+
+    private String figureurl_qq;
+    /**
+     * 	大小为40×40像素的QQ头像URL。
+     */
+    private String figureurl_qq_1;
+    /**
+     * 	大小为100×100像素的QQ头像URL。需要注意，不是所有的用户都拥有QQ的100×100的头像，但40×40像素则是一定会有。
+     */
+    private String figureurl_qq_2;
+
+    /**
+     * 	标识用户是否为黄钻用户（0：不是；1：是）。
+     */
+    private String is_yellow_vip;
+    /**
+     * 	标识用户是否为黄钻用户（0：不是；1：是）
+     */
+    private String vip;
+    /**
+     * 	黄钻等级
+     */
+    private String yellow_vip_level;
+    /**
+     * 	黄钻等级
+     */
+    private String level;
+    /**
+     * 标识是否为年费黄钻用户（0：不是； 1：是）
+     */
+    private String is_yellow_year_vip;
+
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
+    }
+
+    public String getIs_lost() {
+        return is_lost;
+    }
+
+    public void setIs_lost(String is_lost) {
+        this.is_lost = is_lost;
+    }
 
     public String getRet() {
         return ret;
@@ -49,6 +132,38 @@ public class QQUserInfo {
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getFigureurl() {
@@ -75,6 +190,14 @@ public class QQUserInfo {
         this.figureurl_2 = figureurl_2;
     }
 
+    public String getFigureurl_qq() {
+        return figureurl_qq;
+    }
+
+    public void setFigureurl_qq(String figureurl_qq) {
+        this.figureurl_qq = figureurl_qq;
+    }
+
     public String getFigureurl_qq_1() {
         return figureurl_qq_1;
     }
@@ -89,14 +212,6 @@ public class QQUserInfo {
 
     public void setFigureurl_qq_2(String figureurl_qq_2) {
         this.figureurl_qq_2 = figureurl_qq_2;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
     }
 
     public String getIs_yellow_vip() {
@@ -139,41 +254,19 @@ public class QQUserInfo {
         this.is_yellow_year_vip = is_yellow_year_vip;
     }
 
-    /**
-     * 	大小为100×100像素的QQ空间头像URL。
-     */
-    private String figureurl_2;
-    /**
-     * 	大小为40×40像素的QQ头像URL。
-     */
-    private String figureurl_qq_1;
-    /**
-     * 	大小为100×100像素的QQ头像URL。需要注意，不是所有的用户都拥有QQ的100×100的头像，但40×40像素则是一定会有。
-     */
-    private String figureurl_qq_2;
-    /**
-     * 	性别。 如果获取不到则默认返回”男”
-     */
-    private String gender;
-    /**
-     * 	标识用户是否为黄钻用户（0：不是；1：是）。
-     */
-    private String is_yellow_vip;
-    /**
-     * 	标识用户是否为黄钻用户（0：不是；1：是）
-     */
-    private String vip;
-    /**
-     * 	黄钻等级
-     */
-    private String yellow_vip_level;
-    /**
-     * 	黄钻等级
-     */
-    private String level;
-    /**
-     * 标识是否为年费黄钻用户（0：不是； 1：是）
-     */
-    private String is_yellow_year_vip;
+    public String getConstellation() {
+        return constellation;
+    }
 
+    public void setConstellation(String constellation) {
+        this.constellation = constellation;
+    }
+
+    public String getFigureurl_type() {
+        return figureurl_type;
+    }
+
+    public void setFigureurl_type(String figureurl_type) {
+        this.figureurl_type = figureurl_type;
+    }
 }

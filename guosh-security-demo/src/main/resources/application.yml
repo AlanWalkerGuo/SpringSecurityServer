@@ -1,13 +1,11 @@
 server:
-  port: 8080
-  context-path: /guoshsecurity
-
+  port: 80
 spring:
   datasource:
     druid:
-      url: jdbc:mysql://localhost:3306/guosecurity?useUnicode=true&characterEncoding=utf8&useSSL=true
+      url: jdbc:mysql://106.13.47.59:3306/guosecurity?useUnicode=true&characterEncoding=utf8&useSSL=false
       username: root
-      password: root
+      password: Bluewave1.
       driver-class-name: com.mysql.jdbc.Driver
       #连接池初始化大小最小最大
       initial-size: 2
@@ -79,3 +77,13 @@ guosh:
       #短信验证码配置属性:length,expreIn,url
       sms:
         length: 6
+
+    #第三方登陆
+    social:
+      #回调路径+供应商id等于第三方登录请求路径
+      filtertProcessesUrl: /qqLogin
+      qq:
+        appId: 100550231
+        appSecret: 69b6ab57b22f3c2fe6a6149274e3295e
+        #供应商id
+        providerId: callback.do

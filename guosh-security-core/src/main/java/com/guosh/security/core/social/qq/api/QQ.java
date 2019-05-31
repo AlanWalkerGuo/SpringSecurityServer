@@ -12,5 +12,5 @@ public interface QQ {
      * 获取用户信息
      * @return
      */
-    public QQUserInfo getUserInfo() throws IOException;
+    public QQUserInfo getUserInfo();
 }

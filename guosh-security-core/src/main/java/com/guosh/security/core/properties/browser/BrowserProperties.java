@@ -5,6 +5,11 @@ public class BrowserProperties {
     //自定义登陆页面
     private String loginPage = "/defaultLogin.html"; //如果用户没有配置登陆页面走默认
 
+    //自定义注册页面
+    private String signUpUrl = "/defaultSignUp.html"; //默认登陆页面
+
+
+
     //自定义处理登陆请求默认异步
     private LoginType loginType = LoginType.JSON;
 
@@ -34,5 +39,13 @@ public class BrowserProperties {
 
     public void setRememberMeSeconds(int rememberMeSeconds) {
         this.rememberMeSeconds = rememberMeSeconds;
+    }
+
+    public String getSignUpUrl() {
+        return signUpUrl;
+    }
+
+    public void setSignUpUrl(String signUpUrl) {
+        this.signUpUrl = signUpUrl;
     }
 }
