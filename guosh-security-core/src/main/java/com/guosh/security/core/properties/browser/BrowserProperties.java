@@ -6,7 +6,7 @@ public class BrowserProperties {
     private String loginPage = "/defaultLogin.html"; //如果用户没有配置登陆页面走默认
 
     //自定义注册页面
-    private String signUpUrl = "/defaultSignUp.html"; //默认登陆页面
+    private String signUpUrl = "/defaultSignUp.html";
 
 
 

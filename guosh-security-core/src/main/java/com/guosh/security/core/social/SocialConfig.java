@@ -31,7 +31,7 @@ public class SocialConfig extends SocialConfigurerAdapter {
     @Autowired
     private SecurityProperties securityProperties;
 
-
+    //第三方免注册
     @Autowired(required = false)
     private ConnectionSignUp connectionSignUp;
 

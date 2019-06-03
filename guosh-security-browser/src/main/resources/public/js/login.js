@@ -4,7 +4,8 @@ $(function(){
 	//获取项目名
 	var pathName=window.document.location.pathname;
 	projectName=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
-	$("#qq").attr("href",projectName+"/qqLogin/callback.do")
+	$("#qq").attr("href",projectName+"/qqLogin/callback.do");
+	$("#weixin").attr("href",projectName+"/qqLogin/weixin");
 
 	var tab = 'account_number';
 	// 选项卡切换

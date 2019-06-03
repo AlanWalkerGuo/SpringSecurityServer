@@ -1,4 +1,4 @@
-package com.guosh.security.core.social.qq.cofnig;
+package com.guosh.security.core.social.qq.config;
 
 import com.guosh.security.core.properties.SecurityProperties;
 import com.guosh.security.core.properties.social.QQProperties;

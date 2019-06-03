@@ -79,7 +79,8 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                             SecurityConstants.DEFAULT_SIGN_IN_PROCESSING_URL_MOBILE, //手机登陆
                             securityProperties.getBrowser().getLoginPage(), //登陆页面
                             securityProperties.getBrowser().getSignUpUrl(), //注册页面
-                            SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*","/user/regist") //验证码
+                            SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*", //验证码
+                            "/user/regist")//第三方注册跟绑定
                             .permitAll()//login请求除外不需要认证
                     .anyRequest()
                     .authenticated()//所有请求都需要身份认证
