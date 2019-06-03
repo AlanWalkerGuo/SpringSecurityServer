@@ -42,17 +42,14 @@ public class UserController {
     //注册或者绑定逻辑
     @RequestMapping(value = "/regist",method = RequestMethod.POST)
     public void regist(String username, String password, HttpServletRequest request) {
-        String id=null;
         User user= userRepository.findByUsernameOrMobile(username,username);
-        if(user!=null){
-            id=user.getId();
-        }else{
+        if(user==null){
             User addUser =new User();
             addUser.setUsername(username);
             addUser.setPassword(passwordEncoder.encode(password));
-            id=userRepository.save(addUser).getId();
+            userRepository.save(addUser).getId();
         }
-        providerSignInUtils.doPostSignUp(id,new ServletWebRequest(request));
+        providerSignInUtils.doPostSignUp(username,new ServletWebRequest(request));
     }
 
 

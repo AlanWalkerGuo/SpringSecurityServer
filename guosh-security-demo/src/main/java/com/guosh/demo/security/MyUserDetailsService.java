@@ -1,13 +1,14 @@
 package com.guosh.demo.security;
 
 import com.guosh.demo.repository.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.social.security.SocialUser;
 import org.springframework.social.security.SocialUserDetails;
 import org.springframework.social.security.SocialUserDetailsService;
@@ -15,15 +16,32 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MyUserDetailsService implements UserDetailsService , SocialUserDetailsService {
+    private Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired
     private UserRepository userRepository;
-
-//    @Autowired
-//    private PasswordEncoder passwordEncoder;
 
     //表单登陆
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        logger.info("表单登录用户名:" + username);
+        return buildUser(username);
+    }
+
+
+    /**
+     * 第三方登录
+     * @param userId
+     * @return
+     * @throws UsernameNotFoundException
+     */
+    @Override
+    public SocialUserDetails loadUserByUserId(String userId) throws UsernameNotFoundException {
+        logger.info("第三方登录用户Id:" + userId);
+        return buildUser(userId);
+    }
+
+
+    private SocialUserDetails buildUser(String username) {
         //isAccountNonExpired 账号是否过期
         //isCredentialsNonExpired 密码是否过期
         //isAccountNonLocked 账号是否锁定用于冻结状态
@@ -38,27 +56,8 @@ public class MyUserDetailsService implements UserDetailsService , SocialUserDeta
             throw new UsernameNotFoundException(username);
         }
 
-        return new User(username,userRepository.findByUsernameOrMobile(username,username).getPassword(),
+        return new SocialUser(username,userRepository.findByUsernameOrMobile(username,username).getPassword(),
                 true,true,true,userRepository.findByUsernameOrMobile(username,username).isAccountNonLocked(),
-                AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
-    }
-
-
-    /**
-     * 第三方登录
-     * @param userId
-     * @return
-     * @throws UsernameNotFoundException
-     */
-    @Override
-    public SocialUserDetails loadUserByUserId(String userId) throws UsernameNotFoundException {
-        com.guosh.demo.domain.User user=userRepository.findOne(userId);
-        if(user==null){
-            throw new UsernameNotFoundException(userId);
-        }
-
-        return new SocialUser(userId,userRepository.findOne(userId).getPassword(),
-                true,true,true,userRepository.findOne(userId).isAccountNonLocked(),
                 AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
     }
 }
