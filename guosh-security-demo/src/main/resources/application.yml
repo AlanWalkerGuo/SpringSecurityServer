@@ -45,14 +45,14 @@ spring:
         #是否能按重制按键
         reset-enable: true
 
-  #关闭spring session
+  #session存储类型
   session:
-    store-type: none
-
+    store-type: redis
   jpa:
     show-sql: true
     #自动创建表结构
     generate-ddl: false
+  #redis配置
   redis:
     host: 106.13.47.59
     port: 6379
