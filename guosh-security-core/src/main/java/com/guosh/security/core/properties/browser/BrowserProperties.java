@@ -1,9 +1,12 @@
 package com.guosh.security.core.properties.browser;
 
-public class BrowserProperties {
+import com.guosh.security.core.properties.SecurityConstants;
 
+public class BrowserProperties {
+    //session配置项
+    private SessionProperties session = new SessionProperties();
     //自定义登陆页面
-    private String loginPage = "/defaultLogin.html"; //如果用户没有配置登陆页面走默认
+    private String loginPage = SecurityConstants.DEFAULT_LOGIN_PAGE_URL; //如果用户没有配置登陆页面走默认
 
     //自定义注册页面
     private String signUpUrl = "/defaultSignUp.html";
@@ -47,5 +50,13 @@ public class BrowserProperties {
 
     public void setSignUpUrl(String signUpUrl) {
         this.signUpUrl = signUpUrl;
+    }
+
+    public SessionProperties getSession() {
+        return session;
+    }
+
+    public void setSession(SessionProperties session) {
+        this.session = session;
     }
 }

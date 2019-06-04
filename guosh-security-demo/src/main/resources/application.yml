@@ -1,5 +1,8 @@
 server:
   port: 80
+  #session失效时间最小一分钟
+  session:
+    timeout: 3600
 spring:
   datasource:
     druid:
@@ -41,9 +44,11 @@ spring:
         login-password: guoadmin
         #是否能按重制按键
         reset-enable: true
+
   #关闭spring session
   session:
     store-type: none
+
   jpa:
     show-sql: true
     #自动创建表结构
@@ -69,6 +74,10 @@ guosh:
       #loginPage: /demoLogin.html  #自定义登陆页面默认defaultLogin.html
       loginType: JSON  #JSON异步登陆 REDITECT同步登陆
       #rememberMeSeconds: 3600  #设置记住密码失效时间单位(秒)默认一小时
+      #session:  #session配置
+        #maximumSessions: 1 #用户最大session个数默认1
+        #maxSessionsPreventsLogin: false #达到最大session时是否阻止新的登录请求，默认为false，不阻止
+        #sessionInvalidUrl: session失效跳转路径
     #验证码相关配置
     code:
       #图形验证码配置属性:width,height,length,expreIn,url

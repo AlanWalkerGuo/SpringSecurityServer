@@ -13,6 +13,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.security.web.session.InvalidSessionStrategy;
+import org.springframework.security.web.session.SessionInformationExpiredStrategy;
 import org.springframework.social.security.SpringSocialConfigurer;
 
 import javax.sql.DataSource;
@@ -52,6 +54,15 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private DataSource dataSource;
 
+    //处理session失效
+    @Autowired
+    private InvalidSessionStrategy invalidSessionStrategy;
+
+    //处理最大登陆数
+    @Autowired
+    private SessionInformationExpiredStrategy sessionInformationExpiredStrategy;
+
+
     //记住密码
     @Bean
     public PersistentTokenRepository persistentTokenRepository(){
@@ -90,6 +101,11 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                     .tokenValiditySeconds(securityProperties.getBrowser().getRememberMeSeconds()) //失效时间
                     .userDetailsService(userDetailsService)
                     .and()
-                .sessionManagement().maximumSessions(1).expiredUrl(SecurityConstants.DEFAULT_UNAUTHENTICATION_URL);//用户只能登陆一次
+                .sessionManagement()
+                    .invalidSessionStrategy(invalidSessionStrategy) //session失效后的处理
+                    .maximumSessions(securityProperties.getBrowser().getSession().getMaximumSessions()) //用户最大登陆数
+                    .maxSessionsPreventsLogin(securityProperties.getBrowser().getSession().isMaxSessionsPreventsLogin())//是否阻止登陆
+                    .expiredUrl(SecurityConstants.DEFAULT_UNAUTHENTICATION_URL)//用户只能登陆一次
+                    .expiredSessionStrategy(sessionInformationExpiredStrategy);//用户被挤掉后的处理
     }
 }
