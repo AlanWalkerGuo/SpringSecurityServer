@@ -2,7 +2,7 @@ server:
   port: 80
   #session失效时间最小一分钟
   session:
-    timeout: 3600
+    timeout: 1800 #session失效时间最小一分钟
 spring:
   datasource:
     druid:
@@ -54,7 +54,7 @@ spring:
     generate-ddl: false
   #redis配置
   redis:
-    host: 106.13.47.59
+    host: 127.0.0.1
     port: 6379
 
 #上传文件路径
@@ -72,6 +72,7 @@ guosh:
     #浏览器登陆配置
     browser:
       #loginPage: /demoLogin.html  #自定义登陆页面默认defaultLogin.html
+      signOutUrl: /defaultLogin.html #退出后跳转的页面不配置择返回json
       loginType: JSON  #JSON异步登陆 REDITECT同步登陆
       #rememberMeSeconds: 3600  #设置记住密码失效时间单位(秒)默认一小时
       #session:  #session配置

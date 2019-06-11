@@ -39,7 +39,7 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    //注册或者绑定逻辑
+    //第三方注册或者绑定逻辑
     @RequestMapping(value = "/regist",method = RequestMethod.POST)
     public void regist(String username, String password, HttpServletRequest request) {
         User user= userRepository.findByUsernameOrMobile(username,username);

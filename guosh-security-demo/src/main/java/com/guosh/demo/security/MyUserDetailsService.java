@@ -30,14 +30,14 @@ public class MyUserDetailsService implements UserDetailsService , SocialUserDeta
 
     /**
      * 第三方登录
-     * @param userId
+     * @param username
      * @return
      * @throws UsernameNotFoundException
      */
     @Override
-    public SocialUserDetails loadUserByUserId(String userId) throws UsernameNotFoundException {
-        logger.info("第三方登录用户Id:" + userId);
-        return buildUser(userId);
+    public SocialUserDetails loadUserByUserId(String username) throws UsernameNotFoundException {
+        logger.info("第三方登录用户Id:" + username);
+        return buildUser(username);
     }
 
 

@@ -11,7 +11,8 @@ public class BrowserProperties {
     //自定义注册页面
     private String signUpUrl = "/defaultSignUp.html";
 
-
+    //退出登陆
+    private String signOutUrl;
 
     //自定义处理登陆请求默认异步
     private LoginType loginType = LoginType.JSON;
@@ -58,5 +59,13 @@ public class BrowserProperties {
 
     public void setSession(SessionProperties session) {
         this.session = session;
+    }
+
+    public String getSignOutUrl() {
+        return signOutUrl;
+    }
+
+    public void setSignOutUrl(String signOutUrl) {
+        this.signOutUrl = signOutUrl;
     }
 }

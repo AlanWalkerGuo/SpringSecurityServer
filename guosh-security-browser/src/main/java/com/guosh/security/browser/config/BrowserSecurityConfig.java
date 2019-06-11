@@ -10,7 +10,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.session.InvalidSessionStrategy;
@@ -62,6 +65,12 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private SessionInformationExpiredStrategy sessionInformationExpiredStrategy;
 
+    //集群session处理
+    @Autowired
+    private SessionRegistry sessionRegistry;
+    //退出处理请求
+    @Autowired
+    private LogoutSuccessHandler logoutSuccessHandler;
 
     //记住密码
     @Bean
@@ -72,6 +81,13 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
         //tokenRepository.setCreateTableOnStartup(true);
         return tokenRepository;
     }
+
+    @Bean
+    public SessionRegistry getSessionRegistry(){
+        SessionRegistry sessionRegistry=new SessionRegistryImpl();
+        return sessionRegistry;
+    }
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -106,6 +122,16 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                     .maximumSessions(securityProperties.getBrowser().getSession().getMaximumSessions()) //用户最大登陆数
                     .maxSessionsPreventsLogin(securityProperties.getBrowser().getSession().isMaxSessionsPreventsLogin())//是否阻止登陆
                     .expiredUrl(SecurityConstants.DEFAULT_UNAUTHENTICATION_URL)//用户只能登陆一次
-                    .expiredSessionStrategy(sessionInformationExpiredStrategy);//用户被挤掉后的处理
+                    .expiredSessionStrategy(sessionInformationExpiredStrategy)//用户被挤掉后的处理
+                    .sessionRegistry(sessionRegistry)
+                    .and()
+                    .and()
+                .logout()
+                    .logoutUrl("/sigOut")//默认退出路径是logOut可以自定义
+                    .logoutSuccessHandler(logoutSuccessHandler)//处理退出到类
+                   //.logoutSuccessUrl("/login")//退出后跳到到页面
+                    .deleteCookies("JSESSIONID");
+
+
     }
 }
