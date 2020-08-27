@@ -1,4 +1,4 @@
-package com.guosh.security.browser.domain;
+package com.guosh.security.core.support;
 
 
 public class SimpleResponse {

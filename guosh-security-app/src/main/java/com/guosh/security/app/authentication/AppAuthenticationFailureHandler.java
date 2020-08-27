@@ -1,8 +1,8 @@
-package com.guosh.security.browser.authentication;
+package com.guosh.security.app.authentication;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.guosh.security.core.properties.browser.LoginType;
 import com.guosh.security.core.properties.SecurityProperties;
+import com.guosh.security.core.properties.browser.LoginType;
 import com.guosh.security.core.support.SimpleResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@Component("browserAuthenticationFailureHandler")
-public class BrowserAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
+@Component("appAuthenticationFailureHandler")
+public class AppAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
     private Logger logger= LoggerFactory.getLogger(getClass());
 
     @Autowired

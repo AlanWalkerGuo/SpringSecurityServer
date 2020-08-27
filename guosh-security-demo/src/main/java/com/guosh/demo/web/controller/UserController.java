@@ -3,17 +3,25 @@ package com.guosh.demo.web.controller;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.guosh.demo.domain.User;
 import com.guosh.demo.repository.UserRepository;
+import com.guosh.security.app.social.AppSingUpUtils;
+import com.guosh.security.core.properties.SecurityProperties;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.social.connect.web.ProviderSignInUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +30,7 @@ import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +48,13 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private AppSingUpUtils appSingUpUtils;
+
+    @Autowired
+    private SecurityProperties securityProperties;
+
+
     //第三方注册或者绑定逻辑
     @RequestMapping(value = "/regist",method = RequestMethod.POST)
     public void regist(String username, String password, HttpServletRequest request) {
@@ -49,17 +65,31 @@ public class UserController {
             addUser.setPassword(passwordEncoder.encode(password));
             userRepository.save(addUser).getId();
         }
-        providerSignInUtils.doPostSignUp(username,new ServletWebRequest(request));
+        //浏览器绑定
+        //providerSignInUtils.doPostSignUp(username,new ServletWebRequest(request));
+        //app绑定
+        appSingUpUtils.doPostSignUp(new ServletWebRequest(request),username);
     }
 
 
     @RequestMapping(value = "/me",method = RequestMethod.GET)
-    public Object getLoginUser() {
+    public Object getLoginUser(@AuthenticationPrincipal UserDetails user,HttpServletRequest request) throws UnsupportedEncodingException {
         //获取详细登陆信息
-        //SecurityContextHolder.getContext().getAuthentication();
-        //获取用户的登陆信息
-        return ((UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        //return SecurityContextHolder.getContext().getAuthentication();或者Authentication authentication
+        //获取用户的登陆信息 @AuthenticationPrincipal UserDetails user
+        //return ((UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+//        String header=request.getHeader("Authorization");
+//        String token=StringUtils.substringAfter(header,"Bearer ");
+//        //解析jwt转化成对象
+//        Claims claims=Jwts.parser().setSigningKey(securityProperties.getOauth2().getJwtSigningKey().getBytes("UTF-8"))
+//                .parseClaimsJws(token).getBody();
+//        //获取额外添加的值
+//        String demo= (String) claims.get("demo");
+//        System.out.println(demo);
+        WebAuthenticationDetails details  = (WebAuthenticationDetails)SecurityContextHolder.getContext().getAuthentication().getDetails();
+        return details.getRemoteAddress();
 
+//        return user;
     }
 
     @RequestMapping(method = RequestMethod.POST)

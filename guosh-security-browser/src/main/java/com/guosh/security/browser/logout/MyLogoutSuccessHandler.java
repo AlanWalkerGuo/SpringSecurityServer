@@ -1,7 +1,7 @@
 package com.guosh.security.browser.logout;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.guosh.security.browser.domain.SimpleResponse;
+import com.guosh.security.core.support.SimpleResponse;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

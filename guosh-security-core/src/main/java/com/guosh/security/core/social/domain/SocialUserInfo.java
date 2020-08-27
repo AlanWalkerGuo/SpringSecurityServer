@@ -1,4 +1,4 @@
-package com.guosh.security.browser.domain;
+package com.guosh.security.core.social.domain;
 
 /**
  * 通过第三方登陆注册页面返回的信息

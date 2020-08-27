@@ -107,7 +107,8 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                             securityProperties.getBrowser().getLoginPage(), //登陆页面
                             securityProperties.getBrowser().getSignUpUrl(), //注册页面
                             SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*", //验证码
-                            "/user/regist")//第三方注册跟绑定
+                            SecurityConstants.DEFAULT_SOCIAL_USER_INFO,//浏览器第三方用户信息
+                            SecurityConstants.DEFAULT_SOCIAL_USER_REGIST)//第三方注册跟绑定
                             .permitAll()//login请求除外不需要认证
                     .anyRequest()
                     .authenticated()//所有请求都需要身份认证
@@ -127,7 +128,7 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                     .and()
                     .and()
                 .logout()
-                    .logoutUrl("/sigOut")//默认退出路径是logOut可以自定义
+                    //.logoutUrl("/sigOut")//默认退出路径是logout可以自定义
                     .logoutSuccessHandler(logoutSuccessHandler)//处理退出到类
                    //.logoutSuccessUrl("/login")//退出后跳到到页面
                     .deleteCookies("JSESSIONID");

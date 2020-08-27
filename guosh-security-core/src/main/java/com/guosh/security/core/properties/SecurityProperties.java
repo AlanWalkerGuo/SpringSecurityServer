@@ -1,5 +1,6 @@
 package com.guosh.security.core.properties;
 
+import com.guosh.security.core.properties.OAuth2.OAuth2Properties;
 import com.guosh.security.core.properties.browser.BrowserProperties;
 import com.guosh.security.core.properties.code.ValidateCodeProperties;
 import com.guosh.security.core.properties.social.SocialProperties;
@@ -13,6 +14,8 @@ public class SecurityProperties {
     private ValidateCodeProperties code=new ValidateCodeProperties();
     //第三方登陆
     private SocialProperties social=new SocialProperties();
+    //OAuth2相关
+    private OAuth2Properties oauth2=new OAuth2Properties();
 
     public BrowserProperties getBrowser() {
         return browser;
@@ -36,5 +39,13 @@ public class SecurityProperties {
 
     public void setSocial(SocialProperties social) {
         this.social = social;
+    }
+
+    public OAuth2Properties getOauth2() {
+        return oauth2;
+    }
+
+    public void setOauth2(OAuth2Properties oauth2) {
+        this.oauth2 = oauth2;
     }
 }

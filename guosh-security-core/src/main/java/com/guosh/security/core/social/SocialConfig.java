@@ -35,6 +35,9 @@ public class SocialConfig extends SocialConfigurerAdapter {
     @Autowired(required = false)
     private ConnectionSignUp connectionSignUp;
 
+    @Autowired(required = false)
+    private SocialAuthenticationFilterPostProcessor socialAuthenticationFilterPostProcessor;
+
     @Override
     public UsersConnectionRepository getUsersConnectionRepository(ConnectionFactoryLocator connectionFactoryLocator) {
         //把互联数据存储到表
@@ -52,7 +55,9 @@ public class SocialConfig extends SocialConfigurerAdapter {
     public SpringSocialConfigurer sociaSecurityConfig(){
         String filtertProcessesUrl=securityProperties.getSocial().getFiltertProcessesUrl();
         MySpringSocialConfigurer configurer=new MySpringSocialConfigurer(filtertProcessesUrl);
-        configurer.signupUrl(securityProperties.getBrowser().getSignUpUrl());//指定到注册页面
+        //用户与第三方绑定页面
+        configurer.signupUrl(securityProperties.getBrowser().getSignUpUrl());
+        configurer.setSocialAuthenticationFilterPostProcessor(socialAuthenticationFilterPostProcessor);//后处理器
         return configurer;
     }
     //免注册

@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 返回当前账户哪些第三方登陆已经绑定(绑定与解绑)
+ * 返回当前账户哪些第三方登陆已经绑定(绑定与解绑)访问地址/connect
  * @Author: Guosh
  * @Date: 2019-06-03 14:09
  */

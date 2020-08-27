@@ -4,11 +4,9 @@
 package com.guosh.security.browser.session;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.guosh.security.browser.domain.SimpleResponse;
-import org.apache.commons.lang.StringUtils;
+import com.guosh.security.core.support.SimpleResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.util.UrlUtils;

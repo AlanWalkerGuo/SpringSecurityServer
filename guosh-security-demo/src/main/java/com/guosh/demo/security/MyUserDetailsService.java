@@ -5,7 +5,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -58,6 +57,6 @@ public class MyUserDetailsService implements UserDetailsService , SocialUserDeta
 
         return new SocialUser(username,userRepository.findByUsernameOrMobile(username,username).getPassword(),
                 true,true,true,userRepository.findByUsernameOrMobile(username,username).isAccountNonLocked(),
-                AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
+                AuthorityUtils.commaSeparatedStringToAuthorityList("admin,ROLE_USER"));
     }
 }

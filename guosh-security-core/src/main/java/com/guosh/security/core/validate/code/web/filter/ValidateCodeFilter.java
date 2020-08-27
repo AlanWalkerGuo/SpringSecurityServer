@@ -42,7 +42,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
      * 验证码校验失败处理器
      */
     @Autowired
-    private AuthenticationFailureHandler authenticationFailureHandler;
+    private AuthenticationFailureHandler browserAuthenticationFailureHandler;
 
     /**
      * 系统配置信息
@@ -122,7 +122,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
                 }
 
             } catch (ValidateCodeException exception) {
-                authenticationFailureHandler.onAuthenticationFailure(request, response, exception);
+                browserAuthenticationFailureHandler.onAuthenticationFailure(request, response, exception);
                 return;
             }
         }

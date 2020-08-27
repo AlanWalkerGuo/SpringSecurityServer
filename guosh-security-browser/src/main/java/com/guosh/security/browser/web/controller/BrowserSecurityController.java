@@ -1,8 +1,8 @@
 package com.guosh.security.browser.web.controller;
 
-import com.guosh.security.browser.domain.SimpleResponse;
-import com.guosh.security.browser.domain.SocialUserInfo;
 import com.guosh.security.core.properties.SecurityProperties;
+import com.guosh.security.core.social.domain.SocialUserInfo;
+import com.guosh.security.core.support.SimpleResponse;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

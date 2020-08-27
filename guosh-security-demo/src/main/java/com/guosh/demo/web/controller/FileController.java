@@ -45,7 +45,7 @@ public class FileController {
     @RequestMapping(value ="/{id}" ,method = RequestMethod.GET)
     public void download(@PathVariable String id, HttpServletResponse response){
         try(InputStream inputStream = new FileInputStream(new File(fileDataStorePath,"13a2c075b7f44025bbb3c590f7f372eb.txt"));
-            OutputStream outputStream=response.getOutputStream();){
+            OutputStream outputStream=response.getOutputStream()){
 
             response.setContentType("application/x-download");
             response.addHeader("Content-Disposition","attachment;filename="+"13a2c075b7f44025bbb3c590f7f372eb.txt\"");
